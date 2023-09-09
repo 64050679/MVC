@@ -22,8 +22,7 @@ function classifyTypes(version,tokens) {
             //ถ้าเจอสัญลักษณ์ // นำหน้า ให้ข้ามบรรทัดดังกล่าวไปในกระบวนการตัดคำและบ่งบอกประเภท
             if(token.substring(0, 2) == "//"){
                 continue;
-            }
-            if (keywords.includes(token)) {
+            } else if (keywords.includes(token)) {
                 tokenTypes.push(token + ' is Keyword');//เช็คว่าใช่ decare ไหมถ้าใช่ก็ push decare is keyword เข้า ไปเก็บใน tokenType
             } else if (operators.includes(token)) {
                 tokenTypes.push(token + ' is Symbol');// ถ้าเจอ "+" หรือ "=" token นั้นจะเป็น symbol จากนั้นก็ push ไปเก็บใน tokenType
@@ -38,7 +37,9 @@ function classifyTypes(version,tokens) {
     else if (version == 'v2')//ทำเหมือน v1 เเค่เปลี่ยนคำเเสดงผล
     {
         for (const token of tokens) {
-            if (keywords.includes(token)) {
+            if(token.substring(0, 2) == "//"){
+                continue;
+            } else if (keywords.includes(token)) {
                 tokenTypes.push(token + ' Keyword and Sign');
             } else if (operators.includes(token)) {
                 tokenTypes.push(token + 'is Assignment');
