@@ -1,23 +1,19 @@
+//Model
 const keywords = ['declare'];//keyword ของโจทย์
 const operators = ['+', '='];//symbol ที่กำหนดจากโจทย์
 
 function analyze() {
     const sourceCode = document.getElementById('sourceCode').value;//อ่าน input ที่เข้ามา
     const words = splitWord(sourceCode);//จากนั้นทำการตัดคำที่เว้นช่องว่างกันด้วยการ split
-    const wordTypes1 = classifyTokens('v1',words);
-    const wordTypes2 = classifyTokens('v2',words);
+    const wordTypes1 = classifyTypes('v1',words);
+    const wordTypes2 = classifyTypes('v2',words);
 
     ShowResult(wordTypes1);//show model version1
     ShowResult(wordTypes2);//show model version2
 }
 
-function splitWord(sourceCode) {
-    // Split source code into individual tokens
-    return sourceCode.split(/\s+/); 
-}
-
 //Control
-function classifyTokens(version,tokens) {
+function classifyTypes(version,tokens) {
     const tokenTypes = [];//ประกาศ tokenTypes list เพื่อไว้เก็บผลลัพธ์ที่ได้ 
 
     if (version == 'v1')
@@ -54,6 +50,11 @@ function classifyTokens(version,tokens) {
         }
     }
     return tokenTypes
+}
+
+function splitWord(sourceCode) {
+    // Split source code into individual tokens
+    return sourceCode.split(/\s+/); 
 }
 
 //เเสดงผลลัพธ์ผ่านหน้า web โดยใช้ hmtl
